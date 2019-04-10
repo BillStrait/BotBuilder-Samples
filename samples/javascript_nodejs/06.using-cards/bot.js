@@ -65,7 +65,7 @@ class RichCardsBot {
                 // PromptOptions also contains the list of choices available to the user.
                 const promptOptions = {
                     prompt: 'Please select a card:',
-                    reprompt: 'That was not a valid choice, please select a card or number from 1 to 8.',
+                    retryPrompt: 'That was not a valid choice, please select a card or number from 1 to 8.',
                     choices: this.getChoices()
                 };
 
@@ -111,18 +111,18 @@ class RichCardsBot {
             await turnContext.sendActivity({ attachments: [this.createVideoCard()] });
             break;
         case 'All Cards':
-                await turnContext.sendActivity({
-                    attachments: [this.createVideoCard(),
-                        this.createAnimationCard(),
-                        this.createAudioCard(),
-                        this.createHeroCard(),
-                        this.createReceiptCard(),
-                        this.createSignInCard(),
-                        this.createThumbnailCard(),
-                        this.createVideoCard()
-                    ],
-                    attachmentLayout: AttachmentLayoutTypes.Carousel
-                });
+            await turnContext.sendActivity({
+                attachments: [this.createVideoCard(),
+                    this.createAnimationCard(),
+                    this.createAudioCard(),
+                    this.createHeroCard(),
+                    this.createReceiptCard(),
+                    this.createSignInCard(),
+                    this.createThumbnailCard(),
+                    this.createVideoCard()
+                ],
+                attachmentLayout: AttachmentLayoutTypes.Carousel
+            });
             break;
         default:
             await turnContext.sendActivity('An invalid selection was parsed. No corresponding Rich Cards were found.');

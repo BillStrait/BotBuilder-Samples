@@ -12,12 +12,12 @@
         },
         {
             "type": "qna",
-            "name": "",
+            "name": "qnamakerService",
             "kbId": "",
             "subscriptionKey": "",
             "endpointKey": "",
             "hostname": "",
-            "id": "34"
+            "id": "227"
         }
     ],
     "padlock": "",

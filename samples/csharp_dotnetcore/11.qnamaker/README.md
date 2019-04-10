@@ -18,8 +18,9 @@ git clone https://github.com/Microsoft/botbuilder-samples.git
 to create a QnA Maker service.
 - Follow instructions [here](https://docs.microsoft.com/en-us/azure/cognitive-services/qnamaker/tutorials/migrate-knowledge-base) to
 import the [smartLightFAQ.tsv](CognitiveModels/smartLightFAQ.tsv) to your newly created QnA Maker service.
-- Update [qnamaker.bot](qnamaker.bot) with your kbid (KnowledgeBase Id) and endpointKey in the "qna" services section. You can find this
+- Update [qnamaker.bot](qnamaker.bot) with your kbid (KnowledgeBase Id), hostname, and endpointKey in the "qna" services section. You can find this
 information under "Settings" tab for your QnA Maker Knowledge Base at [QnAMaker.ai](https://www.qnamaker.ai)
+  - If you changed the `name` property of the `qna` service in your `.bot` file, be sure to update `QnAMakerKey` in `QnABot.cs`
 - (Optional) Follow instructions [here](https://github.com/Microsoft/botbuilder-tools/tree/master/packages/QnAMaker) to set up the
 QnA Maker CLI to deploy the model.
 
@@ -43,6 +44,16 @@ QnA Maker CLI to deploy the model.
 - Launch the Bot Framework Emulator
 - File -> Open bot and navigate to `botbuilder-samples/samples/csharp_dotnetcore/11.qnamaker` folder.
 - Select the `qnamaker.bot` file.
+
+## Deploy the bot to Azure
+After creating the bot and testing it locally, you can deploy it to Azure to make it accessible from anywhere.
+To learn how, see [Deploy your bot to Azure](https://aka.ms/azuredeployment) for a complete set of deployment instructions.
+
+**Note:** If you already created a QnA Knowledgebase, running `msbot clone services ...` will create an additional one. You can deal with this in two different ways:
+
+1. Remove the entry with `"type": "qna"` from `DeploymentScripts/MsbotClone`. You'll then need to update your `.bot` file with the QnA settings from your previous QnA Knowledgebse and run the `az publish ...` command produced at the end of running the `msbot clone services ...` command.
+
+2. Delete the original QnA Knowledgebase and resources you created earlier. Ensure that you re-import any `.tsv` files, as needed.
 
 # Further reading
 - [Azure Bot Service](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)

@@ -37,12 +37,14 @@ class HomeAutomation {
         this.state = new HomeAutomationState(convoState, userState);
 
         // add recognizers
-        const luisConfig = botConfig.findServiceByNameOrId(LUIS_CONFIGURATION);
+        const luisServiceName = botConfig.name + '_' + LUIS_CONFIGURATION;
+        const luisConfig = botConfig.findServiceByNameOrId(luisServiceName);
         if (!luisConfig || !luisConfig.appId) throw new Error(`Home automation LUIS model not found in .bot file. Please ensure you have all required LUIS models created and available in the .bot file. See readme.md for additional information\n`);
         this.luisRecognizer = new LuisRecognizer({
             applicationId: luisConfig.appId,
             azureRegion: luisConfig.region,
-            // CAUTION: Its better to assign and use a subscription key instead of authoring key here.
+            // CAUTION: Authoring key is used in this example as it is appropriate for prototyping.
+            // When implimenting for deployment/production, assign and use a subscription key instead of an authoring key.
             endpointKey: luisConfig.authoringKey
         });
     }
